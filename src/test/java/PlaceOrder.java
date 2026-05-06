@@ -8,11 +8,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pages.LandingPage;
+import pages.ProductCatalogue;
 
 import java.time.Duration;
 import java.util.List;
 
-public class StandAloneTest {
+public class PlaceOrder {
 
     public static void main(String[] args){
 
@@ -20,29 +21,15 @@ public class StandAloneTest {
 
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.get("https://rahulshettyacademy.com/client");
         LandingPage landingPage = new LandingPage(driver);
-        driver.manage().window().maximize();
-
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-
-        driver.findElement(By.id("userEmail")).sendKeys("balaji143mahi@gmail.com");
-        driver.findElement(By.id("userPassword")).sendKeys("Test@123");
-        driver.findElement(By.xpath("//input[@id='login']")).click();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".mb-3")));
-
-        List<WebElement> products = driver.findElements(By.cssSelector(".mb-3"));
-
-        WebElement prod = products.stream().filter(product -> product.findElement(By.cssSelector("b"))
-                .getText().equals(productName)).findFirst().orElse(null);
-
-        prod.findElement(By.cssSelector(".card-body button:last-of-type")).click();
-
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#toast-container")));
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.cssSelector(".ng-animating")));
+        landingPage.goTo();
+        driver.manage().window().maximize();
+        landingPage.performLogin("balaji143mahi@gmail.com", "Test@123");
+        ProductCatalogue productCatalogue = new ProductCatalogue(driver);
+        List<WebElement> products =  productCatalogue.getProductLists();
+        productCatalogue.addItemToCart(productName);
 
         driver.findElement(By.cssSelector("[routerlink*='cart']")).click();
 
