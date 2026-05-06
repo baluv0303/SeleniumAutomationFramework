@@ -23,8 +23,6 @@ public class ProductCatalogue extends BasePage {
     @FindBy(css =".ng-animating")
     WebElement animator;
 
-
-
     By productBy = By.cssSelector(".mb-3");
     By addItem = By.cssSelector(".card-body button:last-of-type");
     By toast = By.cssSelector("#toast-container");
@@ -46,10 +44,4 @@ public class ProductCatalogue extends BasePage {
         waitForElement(toast);
         waitForElementToDisappear(animator);
     }
-
-    public  void goToCartPage(){
-
-    }
-
-
 }
