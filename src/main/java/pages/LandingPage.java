@@ -23,18 +23,23 @@ public class LandingPage extends BasePage {
     @FindBy(id = "login")
     WebElement loginButton;
 
-    public void performLogin(String email, String password){
+    @FindBy(css = "[class*='flyInOut']")
+    WebElement loginErrorMessage;
+
+    public ProductCatalogue performLogin(String email, String password){
         userEmail.sendKeys(email);
         usePassword.sendKeys(password);
         loginButton.click();
+        return new ProductCatalogue(driver);
     }
 
     public void goTo(){
         driver.get("https://rahulshettyacademy.com/client");
     }
 
-
-    public static class BasePage {
-
+    public String getErrorMessage(){
+        waitForWebElementToAppear(loginErrorMessage);
+        return loginErrorMessage.getText();
     }
+
 }

@@ -20,9 +20,17 @@ public class BasePage {
     @FindBy(css = "[routerlink*='cart']")
     WebElement cartIcon;
 
+    @FindBy(css = "[routerlink*='myorders']")
+    WebElement ordersButton;
+
     public void waitForElement(By findBy){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOfElementLocated(findBy));
+    }
+
+    public void waitForWebElementToAppear(WebElement element){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public void waitForElementToDisappear(WebElement ele) {
@@ -30,8 +38,15 @@ public class BasePage {
         wait.until(ExpectedConditions.invisibilityOf(ele));
     }
 
-    public  void goToCartPage(){
+    public CartPage goToCartPage(){
         cartIcon.click();
+        return new CartPage(driver);
+    }
+
+    public OrderHistoryPage goToOrderHistory(){
+        ordersButton.click();
+        OrderHistoryPage orderHistoryPage = new OrderHistoryPage(driver);
+        return orderHistoryPage;
     }
 
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<suite parallel = "tests" name="SeleniumAutomationSuite">
+
+    <test name="Place order test">
+        <classes>
+            <class name="PlaceOrderTest"/>
+        </classes>
+    </test>
+
+    <test name="Error validations tests">
+        <classes>
+            <class name="LoginInWithInvalidCredentialsTest"/>
+        </classes>
+    </test>
+
+</suite>
