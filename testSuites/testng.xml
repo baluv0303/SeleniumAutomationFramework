@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <suite parallel = "tests" name="SeleniumAutomationSuite">
 
+    <listeners>
+        <listener class-name = "utils.Listeners" />
+    </listeners>
+
     <test name="Place order test">
         <classes>
             <class name="PlaceOrderTest"/>
