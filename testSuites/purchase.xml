@@ -4,12 +4,12 @@
        <listener class-name = "utils.Listeners" />
    </lisetners>
 
-    <groups>
-        <run>
-            <include name = "Purchase" />
-        </run>
+<!--    <groups>-->
+<!--        <run>-->
+<!--            <include name = "Purchase" />-->
+<!--        </run>-->
 
-    </groups>
+<!--    </groups>-->
     <test name="Place order test">
         <classes>
             <class name="PlaceOrderTest"/>
